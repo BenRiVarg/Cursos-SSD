@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+	<link rel="stylesheet" type="text/css" href="/css/estadisticas.css">
+	<title>Estadisticas</title>
+</head>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<div class="container-fluid">
+	  <a class="navbar-brand" href="#">QuizApp</a>
+	  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	  </button>
+	  <div class="collapse navbar-collapse" id="navbarNav">
+		<ul class="navbar-nav">
+		  <li class="nav-item">
+			<a class="nav-link active" aria-current="page" href="index.html">Home</a>
+		  </li>
+		  <li class="nav-item">
+			<a class="nav-link" href="#">Help</a>
+		  </li>
+		  <li class="nav-item">
+			<a class="nav-link" href="#">FAQ</a>
+		  </li>
+		</ul>
+	  </div>
+	</div>
+  </nav>
+<body style="background-color: #b3c6ff;"><br>
+	<div class="container">
+		<div class="row">
+		  <div class="col-10 align-items-start">
+			  <!--
+			<p class="display-6"><b>Secuencia:</b><%= datosDocenteSesion.secuencia.nombre %> </p>
+			<p class="display-3">Alumno: <%=	alumnoAnalizado.alumno.nombre %></p><br>
+			
+		  </div>
+		  <div class="col align-items-end">
+			<p class="display-6"> progreso: <%=	alumnoAnalizado.progreso %></p><br>
+		  -->
+			<% 
+            datosIntentos.forEach (function (quizz){ %>
+					<p class="display-6 my-0 py-0" >Quizz: <%= quizz.nombre %></p><br>
+
+						<% if (quizz.intentos.length!=0){ %>
+								<!--El alumno ya contestó al menos una vez el quizz-->
+									<p class="intento">Intentos: <%= quizz.intentos.length %></p>
+									<% var iteracionInteto=1 %>
+									<%	quizz.intentos.forEach(function(intento){%>
+										<div class="card shadow p-3 mb-5 bg-body rounded">
+											<h4 class="card-header">Intento <%= iteracionInteto %></h4>
+											<div class="card-body">
+												<% if(intento.calificacion){%>
+													<h5 class="card-title"> Tiempo: <%= intento.tiempo %></h5>
+													<p class="card-text">Calificacion: <%= intento.calificacion %>/100</p>
+													<%}
+													else{%>
+														<h5 class="card-title"> Tiempo: 00:10:25</h5>
+														<p class="card-text">Calificacion: 98/100</p>
+														<%}%>
+											  <a class="btn btn-outline-primary" href="/alumnos/revision/<%= intento._id%>" role="button">Ver Intento</a>
+											</div>
+										  </div><br>
+										  <%  iteracionInteto=iteracionInteto+1 %>
+										<%});%>
+						
+						<%}else { %>
+							<!--El alumno no ha contestado el quizz-->
+							<div class="card shadow p-3 mb-5 bg-body rounded">
+								<h4 class="card-header">Sin Intento</h4>
+								<div class="card-body">
+								<h5 class="card-title text-danger">Este alumno no ha contestado este Quizz aún</h5>
+								</div>
+							</div>
+
+							<% } %>
+                <% }); 
+            %>
+
+
+		<!--	<p class="display-6">Intentos: 2</p>---->
+			
+
+		  </div>
+		</div>
+
+		<br>
+
+			<!--
+		<div class="card shadow p-3 mb-5 bg-body rounded">
+			<h4 class="card-header">Intento 1</h4>
+			<div class="card-body">
+			  <h5 class="card-title">Tiempo: 00:10:25</h5>
+			  <p class="card-text">Calificacion: 98/100</p>
+			  <button type="button" class="btn btn-outline-primary">Ver Quizz</button>
+			</div>
+		  </div><br>
+
+		  <div class="card shadow p-3 mb-5 bg-body rounded">
+			<h4 class="card-header">Intento 2</h4>
+			<div class="card-body">
+			  <h5 class="card-title">Tiempo: 00:10:25</h5>
+			  <p class="card-text">Calificacion: 98/100</p>
+			  <button type="button" class="btn btn-outline-primary">Ver Quizz</button>
+			</div>
+		  </div>
+
+		  <div class="card shadow p-3 mb-5 bg-body rounded">
+			<h4 class="card-header">Sin Intento</h4>
+			<div class="card-body">
+			<h5 class="card-title text-danger">Este alumno no ha contestado este Quizz aún</h5>
+			</div>
+		</div>
+			-->
+
+		<div class=" datosAlumno card shadow p-3 mb-5 bg-body rounded col-3">
+			<p class="card-header " >Alumno: <%=	alumnoAnalizado.alumno.nombre %></p>
+			<div class="card-body">
+			  <p class="card-title"> <b>Progreso: </b> <%=	alumnoAnalizado.progreso %> quizzes</p>
+			  <p class="card-text"><b>Secuencia: </b> <%= datosDocenteSesion.secuencia.nombre %></p>
+			</div>
+		  </div>
+	
+		   <!--
+			<p class="display-6"><b>Secuencia:</b><%= datosDocenteSesion.secuencia.nombre %> </p>
+			<p class="display-3">Alumno: <%=	alumnoAnalizado.alumno.nombre %></p><br>
+			
+		  </div>
+		  <div class="col align-items-end">
+			<p class="display-6"> progreso: <%=	alumnoAnalizado.progreso %></p><br>
+		  -->
+
+</body>
+</html>

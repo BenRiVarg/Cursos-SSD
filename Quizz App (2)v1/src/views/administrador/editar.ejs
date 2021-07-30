@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Usuario</title>
+</head>
+<body>
+    <form action="/administrador/editar" method="POST">
+        <h1>Editar Usuarios</h1><br>
+        Nombre:     <input type="text" name="nombre"  value="<%= user.nombre %>" ><br> 
+        Rol: <select name="rol" value="<%= user.rol %>">
+            <option value="alumno">alumno</option>
+            <option value="docente">docente</option>
+            <option value="editor">editor</option>
+
+        </select><br>
+        Estatus:
+        <%
+            if (user.estatus) { %>
+                <input type="radio" name="estatus" value="true" checked="checked"> Activo<br>
+                <input type="radio" name="estatus" value="false"> Inactivo<br>
+            <% }
+            else { %>
+                <input type="radio" name="estatus" value="true" > Activo<br>
+                <input type="radio" name="estatus" value="false" checked="checked"> Inactivo<br>
+                <% }
+            %>  
+
+        Apellido Paterno:<input type="text" name="apPaterno" id="" value="<%= user.apPaterno %>"><br>
+        Apellido Materno:<input type="text" name="apMaterno" id="" value="<%= user.apMaterno %>"><br>
+        Correo: <input type="text" name="correoElectronico" id="" value="<%= user.correoElectronico %>"><br>
+        Teléfono: <input type="text" name="telefono" id="" value="<%= user.telefono %>"><br>
+            <input type="hidden" name="id" value="<%= user._id %>">
+        <input type="submit" value="Enviar">
+    </form>
+    
+</body>
+</html>

@@ -1,0 +1,56 @@
+root {
+  --altolienzo: 550px;
+  --ancholienzo: 770px;
+}
+
+.replica {
+  width: var(--ancholienzo);
+  height: var(--altolienzo);
+  background-color: #99ffcc;
+}
+
+.img-replica {
+  position: absolute;
+  z-index: 0;
+}
+
+.reactivoDrop {
+  position: absolute;
+  width: 100px;
+  height: 50px;
+
+  /*
+  background-color: blue;
+  opacity: 0.2; */
+
+  z-index: 4;
+}
+
+.contenidoDrop {
+  position: absolute;
+  color: white;
+  width: 100px;
+  height: 50px;
+  text-align: center;
+  padding-top: 10px;
+  z-index: 3;
+}
+.cajaDrop {
+  position: absolute;
+  width: 100px;
+  height: 50px;
+  background-color: black;
+  opacity: 0.5;
+  z-index: 2;
+}
+
+.flecha {
+  position: absolute;
+  z-index: 0.2;
+}
+.respuesta-reactivo {
+  border: black solid;
+  width: 200px;
+  height: 50px;
+  z-index: 3;
+}

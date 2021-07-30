@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenido</title>
+    <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+        </style>
+</head>
+<body>
+   <a href="/logout" class="btn btn-danger">Cerrar sesión</a>
+    <h1>Dashboard alumnos</h1>
+    <h1>Hola Alumno</h1>
+    <p>Contendrá la información de todos los examenes para realizar, mostrado por algún filtro(materia, grado etc)</p>
+    <p>Y opciones para ir a dicho examen</p>
+    <!--La ruta de alumno para Dani-->
+    <a href="/grupo/R71MHRG4/alumno/473HHEFW/materia/T9iIq2yO-/secuencia/HU-dW413R/jwt/Token"> pruebaD</a>
+    <% for (var i = 0; i<materias.length; i++) {%>
+      
+        
+          
+                <table>
+            <% for (var j = 0; j<materias[i].registros.length; j++) {%>
+
+          
+                <tr>
+                  <td><%= materias[i].registros[j].nombre %></td>
+         
+                   <td> 
+                    <a href="/alumnos/examen/<%=  materias[i].registros[j].id %>">Realizar Quizz</a>
+                  </td>
+              </tr>  
+        
+            
+            <% } 
+            
+            %>
+          </table>
+    <% } 
+    
+    %>
+    <table>
+      <h1>Sin Filtro</h1>
+        <tr>
+          <th>Nombre del Quizz</th>
+        </tr>
+            <% 
+            quizzes.forEach (function (quizzes){ %>
+            <tr>
+                <td><%= quizzes.nombreQuizz %></td>
+       
+                 <td> 
+                  <a href="/alumnos/examen/<%= quizzes._id %>" target="blank">Realizar Quizz</a>
+                </td>
+            </tr>            
+
+                <% }); 
+            %>
+           
+        
+    
+      </table>
+      <!--
+    <a href="/alumnos/examen">Hacer examen</a><br>
+        -->
+    <a href="/alumnos/registro">Historial de Exámenes</a>
+
+   
+</body>
+</html>

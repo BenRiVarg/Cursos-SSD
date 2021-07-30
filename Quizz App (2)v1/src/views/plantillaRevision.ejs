@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="cache-control" content="no-cache" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="/css/estilosRelacionarColumnasBoton.css">
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
+  <link rel="stylesheet" href="/mobileD/release/default.css">
+  <link rel="stylesheet" href="/mobileD/release/icons.css">
+  <link rel="stylesheet" href="/mobileD/release/debug.css">
+  <script src="/mobileD/release/index.min.js"></script>
+  <script src="/mobileD/release/scroll-behaviour.min.js"></script>
+  <script src="/mobileD/demo/demo.js"></script>
+  <script type="text/javascript" src="/js/relacionarColumnasBoton.js"></script>
+  <title>Hacer Examen</title>
+  <style>
+    :root {
+      --altolienzo: 600px;
+      --ancholienzo: 700px !important;
+    }
+
+    .lienzo {
+      position: relative;
+      display: inline-block;
+      width: var(--ancholienzo);
+      height: var(--altolienzo);
+      background-color: #ccffff;
+      margin: 0 auto;
+      border: 1px solid black;
+    }
+
+    .replica {
+      position: relative;
+      display: inline-block;
+      width: var(--ancholienzo);
+      height: var(--altolienzo);
+      background-color: #99ffcc;
+    }
+
+    .img {
+      margin-top: 75px !important;
+    }
+
+    .positioncuadro1 {
+      position: relative;
+      left: 15px;
+    top: -654px;
+    }
+
+    @media (min-width: 992px) {
+      .col-lg-6 {
+        -ms-flex: 0 0 0%;
+        flex: 0 0 100%;
+        max-width: 100%;
+      }
+    }
+
+    .flecha {
+      width: 160px;
+      height: 120px;
+    }
+
+    .flecha1 {
+      position: relative;
+      left: 140px;
+      top: -890px;
+    }
+
+    .flecha2 {
+      position: relative;
+      left: 158px;
+    top: -846px;
+
+    }
+
+    .positioncuadro2 {
+      position: relative;
+      left: 31px;
+    top: -451px;
+    }
+
+    .flecha3 {
+      position: relative;
+      left: 415px;
+    top: -1081px;
+    }
+
+    .positioncuadro3 {
+      position: relative;
+      left: 550px;
+    top: -742px;
+    }
+
+    .flecha4 {
+      position: relative;
+      left: 328px;
+    top: -1026px;
+    }
+
+    .positioncuadro4 {
+      position: relative;
+      left: 461px;
+    top: -479px;
+    }
+
+    .palabraid {
+      z-index: 1;
+    }
+
+    .palabra1 {
+      position: relative;
+      left: -523px;
+    top: -516px;
+    }
+
+    .palabra2 {
+      position: relative;
+    left: -519px;
+    top: -277px;
+
+    }
+
+    .palabra3 {
+      position: relative;
+      left: 11px;
+    top: -533px;
+    }
+
+    .palabra4 {
+      position: relative;
+      left: -77px;
+    top: -232px;
+    }
+
+    .bien2 {
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAFzSURBVHjarFO9bsJADDZVX6BsLOwwMLEwIOUGxMCSJVIlFl6hEx0qQaUOZerSqUsfIEsGCEKRyD0FLJnIgJSBKhPiT/Q+l1wpBVUtPcmxz/b32dY5qe12S+ec1L8QVOzKb3EGxLO89sUfigLsK2nhconPZrOh4fXwaHbnraPtwWDA4Gq1Cpt93MF6vf6xbK/XM1Qeg5GfYJhgtVq1S68l4xTYcRxD5fi1Wo3m8znyWfYJWkgovhS/kdi2zWDTNCmOY1oul9TtdoERmgBOy7Kg/cJzQZPAhg+xKIposVgwWPmEErnfAYVhSPV6Hbafe8oZENjwIQaw67pcWfnklxHQARKCIKBGo8GdQGDDh1i/3+fK45uxbF41GaMXKfuQ5ecRgseifD7PejQasfZ9PDuJyd1EJuMpDKn7B0GmldELkpAkJwGrIw/90/vp5x6Uy2WptPA8T7/zzha7GB2KHiF9mz62qlxZiTy1H7PH2fl/47sAAwBiEwtZ3OydtgAAAABJRU5ErkJggg==);
+      background-repeat: no-repeat;
+      background-position: left center;
+      padding-left: 16px;
+      margin-left: 540px;
+    }
+
+    .bien3 {
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAFzSURBVHjarFO9bsJADDZVX6BsLOwwMLEwIOUGxMCSJVIlFl6hEx0qQaUOZerSqUsfIEsGCEKRyD0FLJnIgJSBKhPiT/Q+l1wpBVUtPcmxz/b32dY5qe12S+ec1L8QVOzKb3EGxLO89sUfigLsK2nhconPZrOh4fXwaHbnraPtwWDA4Gq1Cpt93MF6vf6xbK/XM1Qeg5GfYJhgtVq1S68l4xTYcRxD5fi1Wo3m8znyWfYJWkgovhS/kdi2zWDTNCmOY1oul9TtdoERmgBOy7Kg/cJzQZPAhg+xKIposVgwWPmEErnfAYVhSPV6Hbafe8oZENjwIQaw67pcWfnklxHQARKCIKBGo8GdQGDDh1i/3+fK45uxbF41GaMXKfuQ5ecRgseifD7PejQasfZ9PDuJyd1EJuMpDKn7B0GmldELkpAkJwGrIw/90/vp5x6Uy2WptPA8T7/zzha7GB2KHiF9mz62qlxZiTy1H7PH2fl/47sAAwBiEwtZ3OydtgAAAABJRU5ErkJggg==);
+      background-repeat: no-repeat;
+      background-position: left center;
+      padding-left: 16px;
+      margin-left: 560px;
+    }
+
+    .bien4 {
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAFzSURBVHjarFO9bsJADDZVX6BsLOwwMLEwIOUGxMCSJVIlFl6hEx0qQaUOZerSqUsfIEsGCEKRyD0FLJnIgJSBKhPiT/Q+l1wpBVUtPcmxz/b32dY5qe12S+ec1L8QVOzKb3EGxLO89sUfigLsK2nhconPZrOh4fXwaHbnraPtwWDA4Gq1Cpt93MF6vf6xbK/XM1Qeg5GfYJhgtVq1S68l4xTYcRxD5fi1Wo3m8znyWfYJWkgovhS/kdi2zWDTNCmOY1oul9TtdoERmgBOy7Kg/cJzQZPAhg+xKIposVgwWPmEErnfAYVhSPV6Hbafe8oZENjwIQaw67pcWfnklxHQARKCIKBGo8GdQGDDh1i/3+fK45uxbF41GaMXKfuQ5ecRgseifD7PejQasfZ9PDuJyd1EJuMpDKn7B0GmldELkpAkJwGrIw/90/vp5x6Uy2WptPA8T7/zzha7GB2KHiF9mz62qlxZiTy1H7PH2fl/47sAAwBiEwtZ3OydtgAAAABJRU5ErkJggg==);
+      background-repeat: no-repeat;
+      background-position: left center;
+      padding-left: 16px;
+      margin-left: 542px;
+    }
+
+    .bien5 {
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAFzSURBVHjarFO9bsJADDZVX6BsLOwwMLEwIOUGxMCSJVIlFl6hEx0qQaUOZerSqUsfIEsGCEKRyD0FLJnIgJSBKhPiT/Q+l1wpBVUtPcmxz/b32dY5qe12S+ec1L8QVOzKb3EGxLO89sUfigLsK2nhconPZrOh4fXwaHbnraPtwWDA4Gq1Cpt93MF6vf6xbK/XM1Qeg5GfYJhgtVq1S68l4xTYcRxD5fi1Wo3m8znyWfYJWkgovhS/kdi2zWDTNCmOY1oul9TtdoERmgBOy7Kg/cJzQZPAhg+xKIposVgwWPmEErnfAYVhSPV6Hbafe8oZENjwIQaw67pcWfnklxHQARKCIKBGo8GdQGDDh1i/3+fK45uxbF41GaMXKfuQ5ecRgseifD7PejQasfZ9PDuJyd1EJuMpDKn7B0GmldELkpAkJwGrIw/90/vp5x6Uy2WptPA8T7/zzha7GB2KHiF9mz62qlxZiTy1H7PH2fl/47sAAwBiEwtZ3OydtgAAAABJRU5ErkJggg==);
+      background-repeat: no-repeat;
+      background-position: left center;
+      padding-left: 16px;
+      margin-left: 542px;
+    }
+  </style>
+</head>
+
+<body style="background-color:#cc99ff;">
+  <div class="container text-center">
+    <h1 class="display-4 mt-3">Titulo del Quizz</h1>
+  </div>
+  <div class="container text-right">
+    <h1>Calificacion:</h1>
+    <h2>100</h2>
+  </div>
+  <form action="/alumnos/correccion" method="POST">
+    <!--P Texto-->
+    <div class="d-flex justify-content-center">
+      <div class="card shadow-lg p-3 my-3 bg-body rounded text-center col-sm-10 col-lg-10">
+
+        <div class="card-body border border-1">
+          <h4 class="display-7 contestada bien">
+            <% <!--=quizz.cuestionario[i].pregunta -->%>Pregunta Para el Alumno
+          </h4><br>
+          <p class="" name="respuesta<%<!--= i -->%>">Respuesta</p>
+          <input type="hidden" name="cuestionario<%<!--= i -->%>" value="<%<!--= quizz.cuestionario[i]._id -->%>">
+        </div>
+      </div>
+    </div>
+    <!--P Texto-->
+    <!--P Imagen-->
+    <div class="d-flex justify-content-center">
+      <div class="card shadow-lg p-3 my-3 bg-body rounded text-center col-sm-10 col-lg-10 ">
+        <div class="card-body border border-1 ">
+          <div class="row">
+            <div class=" col-lg-6 col-sm-12">
+              <h4 class="display-7 contestada bien">
+                <% <!--=quizz.cuestionario[i].pregunta -->%>Pregunta Para el Alumno
+              </h4><br>
+              <!--<input type="text" class="form-control-lg  mb-5" placeholder="Respuesta" aria-label="Respuesta" name="respuesta1"-->
+              <p style="color: blue;" align="left"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo </p>
+
+            </div>
+            <div class=" col-lg-6 col-sm-12">
+              <div class="col-lg-10  col-sm-12 text-center">
+                <!-- <img src="img/hapy.jpeg" class="card-img-top img-fluid" alt="Imagen del Quizz"> -->
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--P Imagen-->
+    <!--P OM-->
+    <div class="d-flex justify-content-center">
+      <div class="card shadow-lg p-3 my-3 bg-body rounded text-center col-sm-10 col-lg-10">
+
+        <div class="card-body border border-1">
+          <h4 class="display-7 contestada ">
+            <% <!--=quizz.cuestionario[i].pregunta -->%>Pregunta Para el Alumno OM
+          </h4><br>
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <input class="form-check-input" type="radio" name="respuesta<%<!--= i -->%>" id="flexRadioDefault1"
+                  value="<%<!--= quizz.cuestionario[i].pregunta[j]-->%>">
+                <label class="form-check-label" for="pregunta">
+                  <%<!--= quizz.cuestionario[i].pregunta[j]-->%> Item
+                </label><br>
+
+                <input class="form-check-input" type="radio" name="respuesta<%<!--= i -->%>" id="flexRadioDefault1"
+                  value="<%<!--= quizz.cuestionario[i].pregunta[j]-->%>">
+                <label class="form-check-label" for="pregunta">
+                  <%<!--= quizz.cuestionario[i].pregunta[j]-->%> Item
+                </label><br>
+              </div>
+              <div class="col">
+                <input class="form-check-input" type="radio" name="respuesta<%<!--= i -->%>" id="flexRadioDefault1"
+                  value="<%<!--= quizz.cuestionario[i].pregunta[j]-->%>">
+                <label class="form-check-label" for="pregunta">
+                  <%<!--= quizz.cuestionario[i].pregunta[j]-->%> Item
+                </label><br>
+                <input class="form-check-input" type="radio" name="respuesta<%<!--= i -->%>" id="flexRadioDefault1"
+                  value="<%<!--= quizz.cuestionario[i].pregunta[j]-->%>">
+                <label class="form-check-label" for="pregunta">
+                  <%<!--= quizz.cuestionario[i].pregunta[j]-->%> Item
+                </label><br>
+              </div>
+            </div>
+
+          </div>
+          <input type="hidden" name="cuestionario<%<!--= i -->%>" value="<%<!--= quizz.cuestionario[i]._id -->%>">
+
+        </div>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center ">
+      <div class="card shadow-lg p-3 my-3 bg-body rounded text-center col-sm-10 col-lg-10 ">
+
+        <div class="card-body border border-1">
+          <h4 class="display-7 contestada mal">
+            <% <!--=quizz.cuestionario[i].pregunta -->%>Resuelve la siguiente expresión
+          </h4><br>
+          <div class="row justify-content-center" style="background-color:lightblue">
+            <p class="mate">5_5 + 3_5</p>
+            <div class="align-self-first">
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Multiple respuesta-->
+    <div class="d-flex justify-content-center">
+      <div class="card shadow-lg p-3 my-3 bg-body rounded text-center col-sm-10 col-lg-10">
+
+        <div class="card-body border border-1">
+          <h4 class="display-7 contestada ">
+            Pregunta
+          </h4><br>
+          <div class="container">
+            <div class="justify-content-center text-danger">
+              No has contestado nada para esta pregunta
+            </div>
+            <div class="row">
+              <div class="col">
+                <input class="form-check-input " type="checkbox"
+                  checked="checked">
+                 <label class="form-check-label" for="pregunta">
+                  
+                   <p class="ml-1 bien text-success">Item</p>
+                 </label><br>
+                
+              
+
+                <input class="form-check-input" type="checkbox" name="respuesta<%<!--= i -->%>" id="flexRadioDefault1"
+                  value="<%<!--= quizz.cuestionario[i].pregunta[j]-->%>" checked="checked">
+                <label class="form-check-label" for="pregunta">
+                  <p class="ml-1 mal text-danger">Item</p> 
+                </label><br>
+              </div>
+              <div class="col">
+                <input class="form-check-input" type="checkbox" name="respuesta<%<!--= i -->%>" id="flexRadioDefault1"
+                  value="<%<!--= quizz.cuestionario[i].pregunta[j]-->%>" >
+                <label class="form-check-label" for="pregunta">
+                  <p class="ml-1 text-success">Item</p>
+                </label><br>
+                <input class="form-check-input" type="checkbox" name="respuesta<%<!--= i -->%>" id="flexRadioDefault1"
+                  value="<%<!--= quizz.cuestionario[i].pregunta[j]-->%>">
+                <label class="form-check-label" for="pregunta">
+                  <%<!--= quizz.cuestionario[i].pregunta[j]-->%> Item
+                </label><br>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Termina Múltiple Respuesta -->
+
+    <!--P Relacional-->
+    <div class="d-flex justify-content-center">
+      <div class="card shadow-lg p-3 my-3 bg-body rounded text-center col-sm-10 col-lg-10">
+
+        <div class="card-body border border-1">
+          <h4 class="display-7">
+            <% <!--=quizz.cuestionario[i].pregunta -->%>Relaciona los Items
+          </h4><br>
+          <div class="d-flex justify-content-center container">
+            <div class="row">
+              <table class="tablaEjercicio">
+
+                <div class="col order-first">
+                  <tr>
+                    <td class="botonPregunta mx-3 px-3 contestada bien"><button>A</button> </td>
+                    <td class="mx-5" style="margin-right: 5px;">Opcion 1</td>
+                    <td class="botonRespuesta mx-3 px-3"><button>1</button> </td>
+                    <td class="celdaRespuesta mx-3">R Opcion1 </td>
+                  </tr>
+                </div>
+
+
+
+                <div class="col order-last">
+                  <tr>
+
+                    <td class="botonPregunta mx-3 px-3 contestada mal"><button>B</button> </td>
+                    <td class="mx-3">Opcion 1</td>
+                    <td class="botonRespuesta mx-3 px-3"><button>2</button> </td>
+                    <td class="celdaRespuesta mx-3">R Opcion1 </td>
+                  </tr>
+                </div>
+
+              </table>
+            </div>
+
+          </div>
+          <input type="hidden" name="cuestionario<%<!--= i -->%>" value="<%<!--= quizz.cuestionario[i]._id -->%>">
+
+        </div>
+      </div>
+    </div>
+    <!--P Relacional-->
+
+    <!--P Relacional-->
+    <div class="d-flex justify-content-center">
+      <div class="card shadow-lg p-3 my-3 bg-body rounded text-center col-sm-10 col-lg-10">
+
+        <div class="card-body border border-1">
+          <h4 class="display-7">
+            <% <!--=quizz.cuestionario[i].pregunta -->%>Prueba Drag
+          </h4>
+          <div class="d-flex justify-content-center container">
+            <div class="row">
+              <table class="tablaEjercicio">
+                <div class="col-lg-6 lienzo shadow mt-5 mb-5">
+                  <img class="img" src="/img/hapy.jpeg" alt="">
+                  <h4 id="tituloR" class="text-dark"></h4>
+                  <div id="demo" type="hidden" class="respuestaDrag text-dark">¡Correcto!
+                  </div>
+                  <div id="demo2" type="hidden" class="respuestaDrag text-dark">¡Correcto!
+                  </div>
+                  <div id="demo3" type="hidden" class="respuestaDrag text-dark">¡Correcto!
+                  </div>
+                  <div id="demo4" type="hidden" class="respuestaDrag text-dark">¡Correcto!
+                  </div>
+                  <div id="demo5" type="hidden" class="respuestaDrag text-dark">¡Están todas correctas!
+                  </div>
+                  <div class="">
+                    <div id="drag1" class="bien2 palabra1 palabraid text-light fw-bold text-center">
+                      Ojos</div>
+                    <div id="drag2" class="bien3 palabra2 palabraid text-light fw-bold text-center">
+                      Nariz</div>
+                    <div id="drag3" class="bien4 palabra3 palabraid text-light fw-bold text-center">
+                      Oreja</div>
+                    <div id="drag4" class="bien5 palabra4 palabraid text-light fw-bold text-center">
+                      Hocico</div>
+                  </div>
+                 
+
+                  <div class="cuadros" style="width: 150px">
+                    <div class="container">
+                      <div class="widget div1 positioncuadro1" id="cuadro1"></div>
+
+                      <div class="widget div1 positioncuadro2" id="cuadro2"></div>
+
+
+                      <div class="widget div1 positioncuadro3" id="cuadro3"></div>
+
+                      <div class="widget div1 positioncuadro4" id="cuadro4"></div>
+
+                    </div>
+                    <div class="flechas">
+                      <img class="widget flecha flecha1" src="/img/flechadigaiz.png" alt="">
+                      <img class="widget flecha flecha2" src="/img/diagonalizinvertida.png" alt="">
+                      <img class="widget flecha flecha3" src="/img/flechadiaderecha.png" alt="">
+                      <img class="widget flecha flecha4" src="/img/diagonalderinvertida.png" alt="">
+                    </div>
+                  </div>
+                </div>
+              </table>
+            </div>
+
+          </div>
+          <input type="hidden" name="cuestionario<%<!--= i -->%>" value="<%<!--= quizz.cuestionario[i]._id -->%>">
+
+        </div>
+      </div>
+    </div>
+    <!--P Relacional-->
+  </form>
+
+
+
+
+
+  <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
+    integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU"
+    crossorigin="anonymous"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+  <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+  <script src="http://code.jquery.com/ui/1.8.21/jquery-ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+  <script src="/js/funcionesExamen.js" type="text/javascript"></script>
+  <script src="/js/drag.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+    <style>
+        .droptarget{
+            float: left;
+            width: 100px;
+            height: 35px;
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid black;
+        }
+    </style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caliz</title>
+    <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
+  <style>
+  /* @media (min-width: 720px) {
+    
+  } */
+  </style>
+    <%-include ('partials/estilo.html'); %>
+</head>
+<body>
+
+
+
+
+  <button class="btn btn-dark" id="btn1" onclick="desabilitado()" > me deshabilito </button>
+
+  <script>
+    function desabilitado(){
+      document.getElementById("btn1").disabled = true;
+      console.log('desabilitado');
+    }
+  </script>
+
+
+   <div class="display-1">Intento de Canvas</div>
+   <canvas class="tipoR" width=800; height="400" style="border: solid black">
+
+   </canvas>
+   <script>
+     var canvas=document.getElementsByClassName("tipoR");
+     var lienzo=canvas[0].getContext("2d");
+     lienzo.beginPath();
+     var cuadro=lienzo.rect(20, 20, 150, 100);
+     cuadro.addEventListener("click", function(){ seleccionar(this); });
+     lienzo.stroke();
+
+     var seleccionado=false;
+     function seleccionar(obj){
+       seleccionado=!seleccionado;
+       if(seleccionado){  //verdadero
+      obj.strokeStyle = "blue";
+       }
+       else{//falso
+      obj.strokeStyle="black";
+       }
+
+     }
+    // botonCrear.addEventListener("click", preguntaAbierta);
+    //botonQuitar.addEventListener("click", function(){ eliminar(this); });
+   </script>
+    <div id="divparent" >
+            <form action="" id="form1"  method="get">
+                <input type="file" id="file-upload" accept="image/*">  
+            </form>
+            <textarea name="img" id="text1" cols="30" rows="1"></textarea>
+            <button id="arr" onclick="crearRecuadro()" >Recuadro</button>
+            <button id="imagenarr" onclick="crearImagen()" >Imagen</button>
+            <button id="btnbrr" onclick="borrar()" >Borrar</button>
+            <hr id="hr1" >
+            <hr id="hr2"  >
+            
+            <div id="file-preview-zone" ></div>
+            <button id="crearPreg"  >crear</button>
+            <button id="eliminarPregunta" onclick="eliminar(this)"  >eliminar</button>
+    </div>
+
+    <div class="container col-lg-12">
+        <div class="row">
+          <div class="col-md-6 m-auto">
+            <h1 class="text-center display-4 my-4">Mongo File Uploads</h1>
+            <form action="/upload" method="POST" enctype="multipart/form-data">
+              <div class="custom-file mb-3">
+                <input type="file" name="file" id="file" class="custom-file-input">
+                <label for="file" class="custom-file-label">Choose File</label>
+              </div>
+              <input type="submit" value="Submit" class="btn btn-primary btn-block">
+            </form>
+            <hr>
+            <% if(files){ %>
+              <% files.forEach(function(file) { %>
+                <div class="card card-body  col-lg-12 mb-3">
+                  <% if(file.isImage) { %>
+                    <img class="imagenRes" src="image/<%= file.filename %>"  alt="">
+                    <% } else { %>
+                      <%= file.filename %>
+                        <% } %>
+                          <form method="POST" action="/files/<%= file._id %>?_method=DELETE">
+                            <button class="btn btn-danger btn-block mt-4">Delete</button>
+                          </form>
+                </div>
+                <% }) %>
+                  <% } else { %>
+                    <p>No files to show</p>
+                    <% } %>
+          </div>
+        </div>
+      </div>
+
+      
+    <script>
+            var boton = document.getElementById("btn1");
+            var parrafo = document.getElementById("parrafo");
+            var div = document.getElementById("div1");
+            var input = document.getElementById("drag");
+        function $(selector) {
+            return document.querySelector(selector) 
+        }
+        $("#crearPreg").addEventListener("click", ()=>{
+            var div = document.createElement("div");
+            div.id = 'divparent';
+            $("#divparent").appendChild(div);
+            console.log(div)
+            var form = document.createElement("form");
+            form.id = 'form1';
+            $("#divparent").appendChild(form);
+            console.log(form);
+            var btn = document.createElement("button");
+            btn.setAttribute("id","arr");
+            btn.type = 'button';
+            var texto = document.createTextNode("Recuadro");
+            btn.appendChild(texto);
+            btn.setAttribute("onclick","crearRecuadro()");
+            $("#divparent").appendChild(btn);
+            console.log(btn);
+            var btn1 = document.createElement("button");
+            btn1.setAttribute("id","imagenarr");
+            btn1.type = 'button';
+            var texto = document.createTextNode("Imagen");
+            btn1.appendChild(texto);
+            btn1.setAttribute("onclick","crearImagen()");
+            $("#divparent").appendChild(btn1);
+            console.log(btn1);
+            var btn2 = document.createElement("button");
+            btn2.setAttribute("id","btnbrr");
+            btn2.type = 'button';
+            var texto = document.createTextNode("Borrar");
+            btn2.appendChild(texto);
+            $("#divparent").appendChild(btn1);
+            console.log(btn1);
+            var hr = document.createElement("hr");
+            hr.setAttribute("id","hr1");
+            $("#divparent").appendChild(hr);
+            console.log(hr);
+            var hr1 = document.createElement("hr");
+            hr1.setAttribute("id","hr2");
+            $("#divparent").appendChild(hr1);
+            console.log(hr1)
+
+        })
+        function eliminar(obj){
+            obj.remove();
+
+        }
+        function readFile(input){
+            if(input.files && input.files[0]){
+                var reader = new FileReader();
+                reader.onload = (e)=>{
+                    var filePreview = document.createElement("img");
+                    filePreview.setAttribute("width","400");
+                    filePreview.setAttribute("height","400");
+                    filePreview.setAttribute("ondragenter","dragEnter(event)");
+                    filePreview.setAttribute("ondraleave","dragLeave(event)");
+                    filePreview.setAttribute("ondragover","allowDrop(event)");
+                    filePreview.setAttribute("ondrop","drop(event)");
+                    filePreview.setAttribute("ondragstart","drag(event)");
+                    filePreview.id = 'file-preview';
+                    filePreview.src = e.target.result;
+                    console.log(e.target.result);
+                    var previewZone = document.getElementById('file-preview-zone');
+                    previewZone.appendChild(filePreview);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+            var fileUpload = document.getElementById('file-upload');
+            fileUpload.onchange = (e)=>{
+                readFile(e.srcElement);
+            }
+
+            function crearRecuadro(){
+            var divdrag = document.createElement("div");
+            divdrag.setAttribute("id","div10");
+            divdrag.setAttribute("class","droptarget");
+            divdrag.setAttribute("ondragenter","dragEnter(event)");
+            divdrag.setAttribute("ondragleave","dragLeave(event)");
+            divdrag.setAttribute("draggable","true")
+            divdrag.setAttribute("ondragstart","drag(event)");
+            divdrag.setAttribute("ondrop","drop(event)");
+            divdrag.setAttribute("ondragover","allowDrop(event)");
+            console.log(divdrag)
+
+            $("#hr1").appendChild(divdrag);
+        
+    }
+    function crearImagen(){
+        var img = document.createElement("img");
+            img.setAttribute("width","88px");
+            img.setAttribute("alt","text");
+            img.setAttribute("height","31px");
+            img.setAttribute("id","dragtarget");
+            img.setAttribute("draggable","true");
+            img.setAttribute("ondragstart","drag(event)");
+            console.log(img)
+            $("#div10").appendChild(img);
+        }
+        function allowDrop(ev){
+            ev.preventDefault();
+        }
+        function drag(event){
+            event.dataTransfer.setData("text",event.target.id);
+        }
+        function drop(event){
+            event.preventDefault();
+            var data = event.dataTransfer.getData("text");
+            event.target.appendChild(document.getElementById(data));
+        }
+        function dragLeave(event) {
+            if ( event.target.className == "droptarget" ) {
+            document.getElementById("demo").innerHTML = "Incorrecto!"
+            }
+        }
+
+        function dragEnter(event) {
+            if ( event.target.className == "droptarget" ) {
+            
+            }
+        }
+        
+
+        function borrar(){
+            var c = confirm("deseas elimiar la imagen");
+            
+            
+        }
+       
+       
+          
+    </script>
+</body>
+</html>

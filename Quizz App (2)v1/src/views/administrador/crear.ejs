@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Usuario </title>
+</head>
+<body>
+    <form action="/administrador/crear" method="POST">
+        <h1>Crear Nuevo Usuario</h1><br>
+        Nombre: <input type="text" name="nombre"><br>
+        Rol: <select name="rol">
+            <option value="alumno">alumno</option>
+            <option value="docente">docente</option>
+            <option value="editor">editor</option>
+
+        </select>
+        Apellido Paterno:<input type="text" name="apPaterno" id=""><br>
+        Apellido Materno:<input type="text" name="apMaterno" id=""><br>
+        Correo: <input type="text" name="correoElectronico" id=""><br>
+        Teléfono: <input type="text" name="telefono" id=""><br>
+
+        <input type="submit" value="Enviar">
+    </form>
+</body>
+</html>

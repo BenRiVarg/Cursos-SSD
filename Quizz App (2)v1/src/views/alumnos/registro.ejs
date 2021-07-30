@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <title>Registro de exámenes</title>
+</head>
+<body>
+    <h1>Vista para ver el historial de los alumnos en sus examenes</h1>
+    <p>Se mostrará los examenes que el alumno ha hecho y la puntuación , tiempo y demás que ha obtenido</p><br>
+    <p>Puede redirigir a otra vista de las cosas que contestó</p>
+    
+    <!--<% 
+    materiasBD.forEach (function (materias){ %>
+       <h6><%= materias.nombre%></h6>
+        <h6><%= materias._id%></h6>
+         <% }); 
+     %> -->
+
+    <p class="display-1">Revisiones</p>
+    <table>
+        <% for (var j = 0; j<registros.length; j++) {%>
+
+      
+            <tr>
+              <td><%= nombreQuizz[j]%></td>
+     
+               <td> 
+                <a  class="btn btn-primary mx-5"href="/alumnos/revision/<%= registros[j]._id%>">Revisar Quizz</a>
+              </td>
+            </tr>  
+    
+        
+        <% } 
+        
+        %>
+      </table>
+
+</body>
+</html>

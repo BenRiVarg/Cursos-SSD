@@ -1,0 +1,341 @@
+.boton_checar {
+  width: auto;
+  height: 40px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+  margin-top: 4px;
+  margin-left: 0;
+  margin-right: 0;
+  padding: 10px;
+  clear: none;
+  color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(225, 100, 0, 1);
+  border-radius: 5px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #eec47b;
+  /*box-shadow: rgb(0, 0, 0) 0px 5px 15px 0px;*/
+}
+
+.boton_checar:hover {
+  color: rgba(255, 100, 0, 0.9);
+  background-color: rgba(255, 255, 255, 1);
+  transition: color 500ms ease, background-color 500ms ease;
+  -webkit-transition: color 500ms ease, background-color 500ms ease;
+}
+
+#boton_reiniciar {
+  width: 0;
+  visibility: hidden;
+  color: rgba(210, 80, 0, 0.9);
+  background: #eec47b;
+}
+
+#boton_reiniciar:hover {
+  color: rgba(255, 50, 0, 0.9);
+  background: #eec47b;
+}
+
+div.retroalimentacion {
+  position: absolute;
+  left: 33%;
+  width: 34%;
+  top: 33%;
+  display: none;
+  z-index: 1;
+  padding: 0px 5px 5px 5px;
+  font-size: 14px;
+  text-align: center;
+  color: #666;
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: rgb(0, 0, 0) 0 5px 15px 0;
+  border-radius: 5px;
+  border-width: 2px;
+  border-style: dashed;
+  border-color: #b1d496;
+}
+
+body {
+  background: #fff;
+  font-family: "Helvetica", Arial, sans-serif;
+  font-size: 18px;
+  color: #666;
+  flood-color: black;
+}
+
+#main {
+  max-width: 960px;
+  margin: auto;
+  background: white;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  padding: 20px;
+  border: 1px dashed #99adff;
+  -moz-box-shadow: 0 0px 0px #9c9c9c;
+  -webkit-box-shadow: 0 0px 0px #9c9c9c;
+  position: relative;
+  /* background-color: #9999ff;*/
+}
+
+/* Extras */
+
+.tablaEjercicio {
+  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+  color: #666;
+}
+
+.tablaEjercicio tr {
+  border: 1px solid #000;
+  text-align: left;
+}
+
+@media screen and (max-width: 480px) {
+  html, body, table, #main {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+  }
+  table {
+    line-height: 1.1em;
+  }
+  .DropTarget {
+    margin: 0;
+    padding: 0.5em;
+  }
+}
+
+.bien {
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAFzSURBVHjarFO9bsJADDZVX6BsLOwwMLEwIOUGxMCSJVIlFl6hEx0qQaUOZerSqUsfIEsGCEKRyD0FLJnIgJSBKhPiT/Q+l1wpBVUtPcmxz/b32dY5qe12S+ec1L8QVOzKb3EGxLO89sUfigLsK2nhconPZrOh4fXwaHbnraPtwWDA4Gq1Cpt93MF6vf6xbK/XM1Qeg5GfYJhgtVq1S68l4xTYcRxD5fi1Wo3m8znyWfYJWkgovhS/kdi2zWDTNCmOY1oul9TtdoERmgBOy7Kg/cJzQZPAhg+xKIposVgwWPmEErnfAYVhSPV6Hbafe8oZENjwIQaw67pcWfnklxHQARKCIKBGo8GdQGDDh1i/3+fK45uxbF41GaMXKfuQ5ecRgseifD7PejQasfZ9PDuJyd1EJuMpDKn7B0GmldELkpAkJwGrIw/90/vp5x6Uy2WptPA8T7/zzha7GB2KHiF9mz62qlxZiTy1H7PH2fl/47sAAwBiEwtZ3OydtgAAAABJRU5ErkJggg==");
+  background-repeat: no-repeat;
+  background-position: left center;
+  padding-left: 16px;
+  /* ancho de la imagen más un poco */
+  margin-left: 10px;
+}
+
+.mal {
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAIhSURBVDjLlZPrThNRFIWJicmJz6BWiYbIkYDEG0JbBiitDQgm0PuFXqSAtKXtpE2hNuoPTXwSnwtExd6w0pl2OtPlrphKLSXhx07OZM769qy19wwAGLhM1ddC184+d18QMzoq3lfsD3LZ7Y3XbE5DL6Atzuyilc5Ciyd7IHVfgNcDYTQ2tvDr5crn6uLSvX+Av2Lk36FFpSVENDe3OxDZu8apO5rROJDLo30+Nlvj5RnTlVNAKs1aCVFr7b4BPn6Cls21AWgEQlz2+Dl1h7IdA+i97A/geP65WhbmrnZZ0GIJpr6OqZqYAd5/gJpKox4Mg7pD2YoC2b0/54rJQuJZdm6Izcgma4TW1WZ0h+y8BfbyJMwBmSxkjw+VObNanp5h/adwGhaTXF4NWbLj9gEONyCmUZmd10pGgf1/vwcgOT3tUQE0DdicwIod2EmSbwsKE1P8QoDkcHPJ5YESjgBJkYQpIEZ2KEB51Y6y3ojvY+P8XEDN7uKS0w0ltA7QGCWHCxSWWpwyaCeLy0BkA7UXyyg8fIzDoWHeBaDN4tQdSvAVdU1Aok+nsNTipIEVnkywo/FHatVkBoIhnFisOBoZxcGtQd4B0GYJNZsDSiAEadUBCkstPtN3Avs2Msa+Dt9XfxoFSNYF/Bh9gP0bOqHLAm2WUF1YQskwrVFYPWkf3h1iXwbvqGfFPSGW9Eah8HSS9fuZDnS32f71m8KFY7xs/QZyu6TH2+2+FAAAAABJRU5ErkJggg==");
+  background-repeat: no-repeat;
+  background-position: left center;
+  padding-left: 16px;
+  /* ancho de la imagen más un poco */
+  margin-left: 10px;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+table td {
+  border: 1px solid white;
+  padding: 5px;
+}
+
+table td:first-child {
+  background-color: #fff;
+  color: #b6b6b6;
+}
+
+table td.activa {
+  background-color: white;
+  color: #3366ff;
+  border-bottom: solid 1px #4d79ff;
+  font-weight: bolder;
+}
+
+table td.contestada {
+  background-color: #fff;
+  color: #666;
+}
+
+table td.celdaRespuesta {
+  background-color: white;
+}
+
+table td button {
+  width: 26px;
+  height: 26px;
+  border-radius: 30px;
+  background: #3366ff;
+  font-size: 18px;
+  color: #fff;
+  /*border:1px solid #84C1B2;*/
+}
+
+table td button:hover {
+  cursor: pointer;
+}
+
+table td.boton.contestada button {
+  border-radius: 0;
+}
+
+table td.boton.contestada + td {
+  background-color: #e6ecff;
+}
+
+td.celdaRespuesta {
+  color: #99b3ff;
+  font-weight: bolder;
+}
+
+td.usado {
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAIhSURBVDjLlZPrThNRFIWJicmJz6BWiYbIkYDEG0JbBiitDQgm0PuFXqSAtKXtpE2hNuoPTXwSnwtExd6w0pl2OtPlrphKLSXhx07OZM769qy19wwAGLhM1ddC184+d18QMzoq3lfsD3LZ7Y3XbE5DL6Atzuyilc5Ciyd7IHVfgNcDYTQ2tvDr5crn6uLSvX+Av2Lk36FFpSVENDe3OxDZu8apO5rROJDLo30+Nlvj5RnTlVNAKs1aCVFr7b4BPn6Cls21AWgEQlz2+Dl1h7IdA+i97A/geP65WhbmrnZZ0GIJpr6OqZqYAd5/gJpKox4Mg7pD2YoC2b0/54rJQuJZdm6Izcgma4TW1WZ0h+y8BfbyJMwBmSxkjw+VObNanp5h/adwGhaTXF4NWbLj9gEONyCmUZmd10pGgf1/vwcgOT3tUQE0DdicwIod2EmSbwsKE1P8QoDkcHPJ5YESjgBJkYQpIEZ2KEB51Y6y3ojvY+P8XEDN7uKS0w0ltA7QGCWHCxSWWpwyaCeLy0BkA7UXyyg8fIzDoWHeBaDN4tQdSvAVdU1Aok+nsNTipIEVnkywo/FHatVkBoIhnFisOBoZxcGtQd4B0GYJNZsDSiAEadUBCkstPtN3Avs2Msa+Dt9XfxoFSNYF/Bh9gP0bOqHLAm2WUF1YQskwrVFYPWkf3h1iXwbvqGfFPSGW9Eah8HSS9fuZDnS32f71m8KFY7xs/QZyu6TH2+2+FAAAAABJRU5ErkJggg==");
+  background-repeat: no-repeat;
+  background-position: left center;
+  padding-left: 16px;
+  /* ancho de la imagen más un poco */
+  margin-left: 10px;
+  opacity: 0.75;
+}
+
+/* Estilo retro pop up */
+
+.dialog-background {
+  background: none repeat scroll 0 0 rgba(0, 0, 25, 0.5);
+  height: 100%;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+.dialog-loading-wrapper {
+  background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+  border: 0 none;
+  left: 20%;
+  right: 20%;
+  position: fixed;
+  top: 20%;
+  z-index: 101;
+}
+
+.dialog-loading-icon {
+  background-color: #ffffff !important;
+  border-radius: 13px;
+  display: block;
+  margin: 0;
+  padding: 1em;
+  text-align: right;
+}
+
+img#botonCerrarRetro {
+  /*float: right;*/
+  cursor: pointer;
+}
+
+img#botonCerrarRetro:hover {
+  opacity: 0.5;
+  color: #666;
+}
+
+img#botonCerrarRetro:hover:after {
+  content: "Cerrar";
+}
+
+#retroFinalMensaje {
+  min-height: 2em;
+  text-align: center;
+}
+
+#retroFinalMensaje div.bien,
+#retroFinalMensaje div.mal {
+  float: left;
+  height: 16px;
+}
+
+#retroFinalMensaje,
+div#conclusion {
+  text-align: center;
+}
+
+/* FIN Estilo retro pop up */
+
+table td.tablaHeader {
+  background: #f0ad77;
+  color: #fff;
+}
+
+table td.tablaHeader2 {
+  background: #fff;
+}
+
+.btn_reiniciar {
+  background: #f0ad77;
+  width: 100px;
+  height: 60px;
+  color: #ffffff;
+  border: 0;
+  cursor: pointer;
+  margin: 20px auto;
+  font-size: 18px;
+  border-radius: 5px;
+}
+
+body.examen {
+  margin: 5px;
+  padding: 5px;
+  background-color: #ffd9b3;
+}
+
+html h1, h2, h3, h4 {
+  color: Black;
+}
+
+/*-- Cuestionario Tipo Drag---*/
+
+.contenedor-Img-Drag {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+}
+
+.fondo-Reactivo {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100px;
+  height: 30px;
+  /*padding: 10px;*/
+  background-color: lightgrey;
+  opacity: 0.2;
+}
+
+.contenido-Reactivo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  color: black;
+  background-color: transparent;
+  margin: 0;
+  /*padding: 10px;*/
+  opacity: 1;
+  width: 100px;
+  height: 30px;
+}
+
+.reactivoDrop {
+  width: 100px;
+  height: 30px;
+}
+
+.opcion {
+  background-color: #c06500;
+  width: 50px;
+  height: 50px;
+  color: white;
+  border-radius: 0;
+  font-size: 26px;
+}
+
+.img-fluid {
+  width: 1020px !important;
+  height: 358px;
+  margin: 0 auto;
+  background-size: cover;
+}

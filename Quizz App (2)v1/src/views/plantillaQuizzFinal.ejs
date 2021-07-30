@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/css/estilosRelacionarColumnasBoton.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" href="/mobileD/release/default.css">
+    <link rel="stylesheet" href="/mobileD/release/icons.css">
+    <link rel="stylesheet" href="/mobileD/release/debug.css">
+    <script src="/mobileD/release/index.min.js"></script>
+    <script src="/mobileD/release/scroll-behaviour.min.js"></script>
+    <script src="/mobileD/demo/demo.js"></script>
+    <script type="text/javascript" src="/js/relacionarColumnasBoton.js"></script> 
+    <title>Hacer Examen</title>   
+<body style="background-color:lightseagreen">
+  <div class="container text-center" >
+    <h1 class= "display-4 mt-3">Titulo del Quizz</h1>
+  </div>
+  <div class="container text-right">
+    <div class="time">
+        <h1>Tiempo</h1>
+        <div class="temporizador">
+          <h2>0:00:00</h2>
+        </div>
+        
+    </div>
+  </div>
+   <form  action="/alumnos/correccion" method="POST">
+        
+        <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      
+       <div class="d-flex justify-content-center">
+          <div class="card shadow-lg p-3 my-3 bg-body rounded text-center col-sm-10 col-lg-10" >
+            
+            <div class="card-body border border-1 ">
+              <h4 class="display-7" ><% <!--= quizz.cuestionario[i].pregunta -->%>Pregunta 1</h4><br>
+              <input type="text" class="form-control pb-3" placeholder="Respuesta" aria-label="Respuesta" name="respuesta<%<!--= i -->%>">
+              <input type="hidden" name="cuestionario<%<!--= i -->%>" value="<%<!--= quizz.cuestionario[i]._id -->%>" class="contestada bien">
+            
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="carousel-item">
+      
+       <div class="d-flex justify-content-center">
+        <div class="card shadow-lg p-3 my-3 bg-body rounded text-center col-sm-10 col-lg-10" >
+          <div class="card-body border border-1">
+            <div class="row">
+              <div class=" col-lg-6 col-sm-12">
+                  <h4 class="display-7" ><% <!--= quizz.cuestionario[i].pregunta -->%>Pregunta Para el Alumno</h4>
+                  <input type="text" class="form-control-lg  mb-5" placeholder="Respuesta" aria-label="Respuesta" name="respuesta1">
+         
+              </div>
+              <div class=" col-lg-6 col-sm-12">
+                <div class="col-lg-10  col-sm-12 text-center">
+                  <img src="img/hapy.jpeg" class="card-img-top img-fluid" alt="Imagen del Quizz">
+                </div>
+               
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      
+       <div class="d-flex justify-content-center">
+      <div class="card shadow-lg p-3 my-3 bg-body rounded text-center col-sm-10 col-lg-10">
+        
+        <div class="card-body border border-1">
+          <h4 class="display-7" ><% <!--= quizz.cuestionario[i].pregunta -->%>Pregunta Para el Alumno OM</h4><br>
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <input class="form-check-input" type="radio" name="respuesta<%<!--= i -->%>" id="flexRadioDefault1" value="<%<!--= quizz.cuestionario[i].pregunta[j]-->%>">
+                <label class="form-check-label" for="pregunta">
+                  <%<!--= quizz.cuestionario[i].pregunta[j]-->%> Item
+                </label><br>
+              
+                <input class="form-check-input" type="radio" name="respuesta<%<!--= i -->%>" id="flexRadioDefault1" value="<%<!--= quizz.cuestionario[i].pregunta[j]-->%>">
+                <label class="form-check-label" for="pregunta">
+                  <%<!--= quizz.cuestionario[i].pregunta[j]-->%> Item
+                </label><br>
+              </div>
+              <div class="col">  
+                <input class="form-check-input" type="radio" name="respuesta<%<!--= i -->%>" id="flexRadioDefault1" value="<%<!--= quizz.cuestionario[i].pregunta[j]-->%>">
+                <label class="form-check-label" for="pregunta">
+                  <%<!--= quizz.cuestionario[i].pregunta[j]-->%> Item
+                </label><br>
+                <input class="form-check-input" type="radio" name="respuesta<%<!--= i -->%>" id="flexRadioDefault1" value="<%<!--= quizz.cuestionario[i].pregunta[j]-->%>">
+                <label class="form-check-label" for="pregunta">
+                  <%<!--= quizz.cuestionario[i].pregunta[j]-->%> Item
+                </label><br>
+                </div>
+            </div>
+
+          </div>
+          <input type="hidden" name="cuestionario<%<!--= i -->%>" value="<%<!--= quizz.cuestionario[i]._id -->%>">
+        
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+ 
+</div>
+       
+  </form><br>
+   
+  <button type="submit" class="btn btn-outline-primary" value="Enviar Respuestas"  data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">Anterior</button>  
+
+  <button type="submit" class="btn btn-outline-primary Enviar " value="Enviar Respuestas" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">Siguiente</button>
+
+  
+ 
+    
+    <script src="/mobileD/mobile.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
+     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+    <script src="/js/funcionesExamen.js" type="text/javascript"></script>
+    <script src="/js/simplyCountdown.min.js" type="text/javascript"></script>
+    <script src="/js/temporizador.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>

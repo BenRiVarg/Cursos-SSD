@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Especialistas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="/css/editoresIndex.css">
+       
+</head>
+
+<body>
+    <div class="mallaBorrar" id="malla"></div>
+    <div class=" col-6 shadow  mx-auto mb-5 bg-body rounded mensajeBorar " id="msgB">
+        <p class="display-6 font-weight-bold text-danger text-center">Atención</p>
+        <p class="text-dark text-center"> ¿Deseas Borrar el Quizz <b id="quizzStc"></b>?</p>
+        <div class="col">
+            <div class="row text-center mx-auto mb-2">
+                    <div class="col  "> <button type="button" class="btn btn-outline-primary" onclick="cancelar()">Cancelar</button></div>
+                    <div class="col "><a class="btn btn-outline-danger" href="/editores/borrar/<#%= Quizzes[j]._id %>" id="ejecutor">Borrar</a></div>
+            </div>
+        </div>
+      </div>
+    <!-- Page Content -->
+    <div class="w3-light-gray w3-nav-bar">
+    
+        <h4 class="display w3-bar-item d-inline-block" onclick="">QuizApp</h4>
+        <p class="display w3-bar-item d-inline-block" onclick="">Help</p>
+        <p class="display w3-bar-item d-inline-block" onclick="">FAQ</p>
+    
+    </div>
+    <!-- Main Site -->
+    <main id="site-main">
+        <div class="container">
+            <div class="box-nav d-flex justify-between">
+                <a href="/editores/crear" class="border-shadow">
+                    <span class="text-gradient">Nuevo Quizz <i class="fas fa-user"></i></span>
+                </a>
+                
+            </div>
+            <div class="text-center">  <p class="display-4">Quizes Creados</p></div>
+          
+            <!-- form handling -->
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Quizz</th>
+                            <th>Acciones</th>
+                           
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for (var j = 0; j < Quizzes.length; j++) { %>
+                            <tr>
+                                <td><%= Quizzes[j].nombreQuizz %></td>
+                                <td>
+                                    <% if(Quizzes[j].contestado){%>
+                                            <p class=" display-7 text-danger"> Este Quizz ya fue contestado por alguien</p>
+                                            <a href="/visualizar/<%= Quizzes[j]._id %>" class="btn btn-primary text-light ">
+                                                Ver
+                                            </a>
+                                            <a href="/editores/token/editar/<%= Quizzes[j]._id %>" class="btn btn-info text-light disabled">
+                                                Editar
+                                            </a>
+                                            <button type="button" class="btn btn-danger disabled" onclick="borrar(this)">Borrar</button>
+                                        <%}
+                                        else{%>
+                                            <a href="/visualizar/<%= Quizzes[j]._id %>" class="btn btn-primary text-light">
+                                                Ver
+                                            </a>
+                                            <a href="/editores/token/editar/<%= Quizzes[j]._id %>" class="btn btn-info text-light">
+                                                Editar
+                                            </a>
+                                            <button type="button" class="btn btn-danger" onclick="borrar(this)">Borrar</button>
+                                            <%}
+                                        %>
+                                </td>
+                            </tr>                        
+                            <% } %>
+                    </tbody>
+                </table>
+        </div>
+    </main>
+    <!-- /Main Site -->
+</body>
+<script src="/js/editoresBorrar.js" type="text/javascript"></script>
+</html>

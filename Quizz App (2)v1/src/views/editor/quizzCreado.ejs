@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="cache-control" content="no-cache" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+   
+    <title>Hacer Examen</title>
+  </head>
+  <body style="background-color:lightseagreen">
+    <div class="container text-center">
+      <h1 class="display-4 mt-3">   <%= quizz.nombreQuizz %>
+      </h1>
+    </div>
+    <div class="container text-right">
+      <div class="time">
+        <h1>Tiempo</h1>
+        <div class="temporizador">
+          <h2>0:00:00</h2>
+        </div>
+
+      </div>
+    </div>
+    <form action="/alumnos/correccion/alumno/<#%=idAlumno%>" method="POST" id="quizz">
+      <input type="hidden" name="quizz" value="<%= quizz._id %>">
+      <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
+        <div class="carousel-inner">
+          <% for(var i=0; i<quizz.cuestionario.length ; i++) {%>
+            <% var activo="" %>
+              <% if (i==0){ %>
+                <% activo="active" %>
+                  <%}%>
+                    <% switch (quizz.cuestionario[i].tipo) { case "tipoT" : %>
+                      <div class="carousel-item <%= activo %>">
+                        <!--P Texto-->
+                        <div class="d-flex justify-content-center ">
+                          <div class="card shadow-lg p-3 my-3 bg-body rounded text-center col-sm-10 col-lg-10">
+
+                            <div class="card-body border border-1 ">
+                              <h4 class="display-7">
+                                <% <!--=quizz.cuestionario[i].pregunta -->%><%= quizz.cuestionario[i].pregunta %>
+                              </h4><br>
+                              <input type="text" class="form-control pb-3" placeholder="Respuesta"
+                                aria-label="Respuesta" name="respuesta<%= i %>">
+                              <input type="hidden" name="cuestionario<%= i %>" value="<%= quizz.cuestionario[i]._id %>">
+
+                            </div>
+                          </div>
+                        </div>
+                        <!--Termina P Texto-->
+                      </div>
+                      <% break; case "tipoOM" : %>
+                        <div class="carousel-item <%= activo %>">
+                          <!--Pregunta OM-->
+                          <% <!-- solo una respuesta posible-->
+                            if (quizz.cuestionario[i].respuesta.length<=1) { %>
+                              <div class="d-flex justify-content-center  ">
+                                <div class="card shadow-lg p-3 my-3 bg-body rounded text-center col-sm-10 col-lg-10">
+
+                                  <div class="card-body border border-1">
+                                    <h4 align="center">
+                                      <%= quizz.cuestionario[i].pregunta[0]%>
+                                    </h4>
+                                    <div class="container">
+                                      <div class="row">
+
+                                        <div class="col">
+                                          <% for (var j=1; j<quizz.cuestionario[i].pregunta.length; j++) {%>
+
+                                            <div class="form-check">
+                                              <input class="form-check-input" type="radio" name="respuesta<%= i %>"
+                                                value=" <%= quizz.cuestionario[i].pregunta[j]%>" id="flexRadioDefault1">
+                                              <label class="form-check-label" for="pregunta">
+                                                <%= quizz.cuestionario[i].pregunta[j]%>
+                                              </label>
+                                            </div>
+
+                                            <% } %>
+                                        </div>
+
+                                      </div>
+
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+
+                              <% } <!-- Multiples Respuestas-->
+                                else { %>
+                                <div class="d-flex justify-content-center  ">
+                                  <div class="card shadow-lg p-3 my-3 bg-body rounded text-center col-sm-10 col-lg-10">
+
+                                    <div class="card-body border border-1">
+                                      <h4 class="display-7">
+                                        <%= quizz.cuestionario[i].pregunta[0] %>
+                                      </h4><br>
+                                      <div class="container">
+                                        <div class="row">
+
+
+
+                                          <div class="col">
+
+                                            <div id="items<%= i %>">
+                                              <% for (var j=1; j<quizz.cuestionario[i].pregunta.length; j++) {%>
+                                                <input class="form-check-input reactivo" type="checkbox"
+                                                  name="respuesta<%= i %>,<%= j %>"
+                                                  value="<%= quizz.cuestionario[i].pregunta[j] %>">
+                                                <label for="pregunta">
+                                                  <%= quizz.cuestionario[i].pregunta[j] %>
+                                                </label>
+                                                <br>
+                                                <% } %>
+                                            </div>
+                                            <input type="hidden" class="contadorItems" value="<%= i %>"
+                                              name="contadorItems<%= i %>">
+                                            <input type="hidden" name="respuesta<%= i %>" value="multiple">
+
+                                          </div>
+
+                                        </div>
+
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+
+
+
+                                <% } %>
+
+
+                                  <input type="hidden" name="cuestionario<%= i %>"
+                                    value="<%= quizz.cuestionario[i]._id %>">
+
+                                  <!--Termina Pregunta OM-->
+                        </div>
+                        <% break; case "tipoR" :%>
+                          <div class="carousel-item <%= activo %>">
+                            <!--P Relacional-->
+                            <div class="d-flex justify-content-center  ">
+                              <div class="card shadow-lg p-3 my-3 bg-body rounded text-center col-sm-10 col-lg-10">
+
+                                <div class="card-body border border-1">
+                                  <h4 class="display-7">Relaciona los items</h4><br>
+                                  <div class="d-flex justify-content-center container">
+                                    <div class="row">
+                                      <table class="tablaEjercicio" id="items<%= i %>">
+                                        <% for (var j=0; j<quizz.cuestionario[i].pregunta.length; j++) {%>
+                                          <div class="col">
+                                            <tr>
+
+                                              <td class="botonPregunta  reactivo mx-3 px-3"><button type="button">
+                                                  <%= j+1%>
+                                                </button> </td>
+                                              <td class="mx-3" id="<%=i%>,<%=j%>">
+                                                <%= quizz.cuestionario[i].pregunta[j]%>
+                                              </td>
+                                              <td class="botonRespuesta mx-3 px-3"><button></button> </td>
+                                              <td class="celdaRespuesta mx-3">
+                                                <div>
+                                                  <input class="apartadoBD" type="hidden" name="r<%=i%>,<%=j%>">
+                                                  <%= quizz.cuestionario[i].respuesta[j]%>
+
+                                                </div>
+                                              </td>
+                                            </tr>
+                                          </div>
+
+                                          <% } %>
+
+
+                                      </table>
+                                      <input type="hidden" class="contadorItems" value="<%= i %>"
+                                        name="contadorItems<%= i %>">
+                                    </div>
+
+                                  </div>
+                                  <input type="hidden" name="cuestionario<%= i %>"
+                                    value="<%= quizz.cuestionario[i]._id %>">
+                                </div>
+                              </div>
+                            </div>
+
+                            <!--Termina P Relacional-->
+                          </div>
+                          <% break; case "tipoM" : %>
+                            <div class="carousel-item <%= activo %>">
+                              <!--P Mate -->
+                              <div class="d-flex justify-content-center  carousel-item">
+                                <div class="card shadow-lg p-3 my-3 bg-body rounded text-center col-sm-10 col-lg-10">
+
+                                  <div class="card-body border border-1">
+                                    <h4 class="display-7">Resuelve la siguiente expresión</h4><br>
+                                    <div class="row justify-content-center" style="background-color:lightblue">
+                                      <p class="mate">
+                                        <%= quizz.cuestionario[i].pregunta[0] %>
+                                      </p>
+                                      <div class="align-self-first">
+
+                                      </div>
+                                      <input class="tipoMate" id="<%= i %>" type="hidden">
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <input type="hidden" name="cuestionario<%= i %>" value="<%= quizz.cuestionario[i]._id %>">
+                              <!--Termina P mate-->
+                            </div>
+                            <% break; case "tipoIT" : %>
+                              <div class="carousel-item <%= activo %>">
+                                <!--pregunta IT-->
+                                <div class="d-flex justify-content-center">
+                                  <div class="card shadow-lg p-3 my-3 bg-body rounded text-center col-sm-10 col-lg-10">
+                                    <div class="card-body border border-1">
+                                      <div class="row">
+                                        <div class=" col-lg-6 col-sm-12">
+                                          <h4 class="display-7">
+                                            <%= quizz.cuestionario[i].pregunta[1] %>
+                                          </h4>
+                                          <input type="text" class="form-control-lg  mb-5" placeholder="Respuesta"
+                                            aria-label="Respuesta" name="respuesta<%= i %>">
+
+                                        </div>
+                                        <div class=" col-lg-6 col-sm-12">
+                                          <div class="col-lg-10  col-sm-12 text-center">
+                                            <img src="/image/<%= quizz.cuestionario[i].pregunta[0] %>"
+                                              class="card-img-top img-fluid" alt="Imagen del Quizz">
+                                          </div>
+
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <input type="hidden" name="cuestionario<%= i %>"
+                                  value="<%= quizz.cuestionario[i]._id %>">
+                                <!--Termina Pregunta IT-->
+
+                              </div>
+                              <% break; 
+                              case "tipoAr" : %>
+                              <div class="carousel-item <%= activo %>">
+                                <!--P Texto-->
+                                <div class="d-flex justify-content-center ">
+                                  <div class="card shadow-lg p-3 my-3 bg-body rounded text-center col-sm-10 col-lg-10">
+        
+                                      <div class="card-body border border-1 ">
+                                      <!---->
+                                      <div class="contanier-fluid ml-0 tipoAr" >
+
+                                        <h4 class="text-center">Coloca las palabras en el lugar correcto.</h4>
+                                        <div class="row mt-3">
+                                          <div class="col-lg-6 sm-12  text-center">
+                                            <div class="col-lg-12 ">
+                                              <!--Lienzo-->
+                                              <div class="replica row mx-auto "id="<%= i %>">
+                                                <% var iteracionLienzo=i%>
+                                                <div class="col-12">
+                                                
+                                                  <img id="<%= quizz.cuestionario[i].pregunta[0].coordenadas[0].id%>"src="/image/<%= quizz.cuestionario[i].pregunta[0].nombre %>" class="img-fluid img-replica">
+                                                </div>
+                            
+                                              </div>
+                                              <!--Lienzo-->
+                                            </div>
+                                          </div>
+                                      
+                                          <div class="col-lg-4 sm-12 text-center mt-5  contenedor-palabras">
+                                            <div
+                                              class="row bg-primary py-3 shadow p-3 mb-5 bg-body rounded-3 border border-dark">
+                                              <div class="mt-2">
+                                                <h3 class="text-light mb-3">Palabras:</h3>
+                                                <div class="contenedor">
+                                                  <%var respuestas=quizz.cuestionario[i].respuesta %>
+                                                  <% respuestas.forEach (function (respuesta){ %>
+        
+                                                    <div id="<%= respuesta.id_respuesta %>" class="text-light fw-bold text-center respuesta-reactivo elementoDrag"><%= respuesta.contenido %></div>
+                                                       
+                                                      <% }); 
+                                                      %> 
+                                               
+                                                </div>
+                                      
+                                               
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <!---->
+                                    </div>
+                                  </div>
+                                </div>
+                                <!--Termina P Texto-->
+                              </div>
+                                <% break
+                            } %>
+                                <% } %>
+
+        </div>
+      </div>
+
+    </form><br>
+
+    <button type="submit" class="btn btn-outline-primary" value="Enviar Respuestas"
+      data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">Anterior</button>
+
+    <button type="submit" class="btn btn-outline-primary Enviar " value="Enviar Respuestas"
+      data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">Siguiente</button>
+
+    <button onclick="enviarQuizz()" class="btn btn-outline-primary Enviar mr-5 mb-5" value="Enviar Respuestas">Enviar
+      respuestas</button>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
+      integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU"
+      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"
+      integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj"
+      crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.8.21/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+    
+   
+  </body>
+
+</html>

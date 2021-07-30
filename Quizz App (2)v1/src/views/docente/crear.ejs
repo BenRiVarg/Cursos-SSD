@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="cache-control" content="no-cache" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
+  <link rel="stylesheet" type="text/css" href="/css/editoresCrear.css">
+
+  <title>Crear Examen</title>
+  <style>
+    .diagonal {
+      height: 90px;
+      width: 70px;
+    }
+  
+    /* .arriba {
+      width: 21px;
+      height: 61px;
+    } */
+
+    .arriba {
+      width: 47px;
+      height: 61px;
+    }
+  
+    .hor {
+      width: 118px;
+      height: 22px;
+    }
+  
+    @media (max-width: 1600px) {
+      .responsivePG {
+        margin-left: 150px;
+      }
+    }
+  
+    @media (max-width: 1280px) {
+      .responsivePG {
+        margin-left: 30px;
+      }
+    }
+  
+    @media (max-width: 1024px) {
+      .responsivePG {
+        margin-left: 0;
+        margin: 0;
+      }
+  
+      .lienzo {
+        margin-top: 25px;
+      }
+    }
+  
+    @media (max-width: 768px) {
+      .responsivePG {
+        margin: 8px;
+      }
+  
+      .lienzo {
+        margin-left: 68px;
+      }
+    }
+  
+    .contenedorIMG {
+      position: absolute;
+      /* top: 205px; left: 165px; */
+      width: 584px;
+      height: 250px;
+      line-height: 524px;
+      margin-left: 103px !important;
+    }
+  
+    .contenedorIMG img {
+      padding: 0;
+      margin: 0 auto;
+      width: 380px;
+    }
+    .contenedorIMG2{
+      position: absolute;
+      /* top: 205px; left: 165px; */
+      width: 584px;
+      height: 254px;
+      line-height: 524px;
+      margin-left: 103px !important;
+    }
+    .contenedorIMG2 img {
+      padding: 0;
+      margin: 0 auto;
+      width: 382.1px;
+    }
+  </style>
+</head>
+
+<body data-spy="scroll" data-target="#insercion" data-offset="50" >
+  <div class="mallaExito" id="malla"></div>
+<!-- Page Content -->
+  <div class="w3-light-gray w3-nav-bar">
+ 
+    <h4 class="display w3-bar-item d-inline-block" onclick="">QuizApp</h4>
+    <p class="display w3-bar-item d-inline-block" onclick="">Help</p>
+    <p class="display w3-bar-item d-inline-block" onclick="">FAQ</p>
+
+  </div>
+  <br>
+  <div class="row justify-content-center mt-5 pt-5">
+    <header class="text-center mb-5">
+      <h1>Crea un nuevo exámen</h1>
+    </header>
+  </div>
+
+  <form action="/editores/crear" id="formularioQuizz" method="POST" enctype="multipart/form-data" align="center">
+    <p id="vista" style="display: none;">docente</p>
+    <input type="hidden" name="nivel"     value="<%= datosDocenteSesion.nivel.id %>">
+        <input type="hidden" name="grado"    value="<%= datosDocenteSesion.grado.id %>" >
+        <input type="hidden" name="bloques"    value="<%= datosDocenteSesion.bloque.id %>" >
+        <input type="hidden" name="claveMateria"   value="<%= datosDocenteSesion.materia.id %>">
+        <input type="hidden" name="Secuencias" value="<%= datosDocenteSesion.secuencia.id %>">
+        <input type="hidden" name="grupo" value="<%= datosDocenteSesion.grupo %>">
+        <input type="hidden" name="creador"   value="<%= datosDocenteSesion.usuario %>">
+    <div class="text-center">
+
+      <p class="display-6">Nombre del Quizz:</p>
+
+      <input class="crearQ" type="text" placeholder="Coloca el nombre:" name="nombreQuizz">
+
+    </div>
+    <div class="text-center mt-3">
+      <p class="display-6">Intentos Permitidos:</p>
+      
+      <input class="crearQ" type="number" id="intentos"  value="1" min="1"; name="intentos">
+
+    </div>
+    <!-- Inserto de nuevas preguntas-->
+    <div id="insercion">
+
+    </div>
+    
+  </form>
+
+  <p class="retroError" id="mensaje">Hay campos sin llenar</p>
+
+  
+  <div class=" col-10 shadow  mb-5 bg-body rounded mensajeExito " id="msgE">
+    <p class="encabezado"> Quizz creado con Éxito.</p>
+    <p class="contenido"> La página será recargada en Breve</p>
+  </div>
+
+  <div class="boton3">
+    <span data-bs-placement="top" data-bs-toggle="tooltip" title="Da click aqui para crear tu Quizz" delay="0"
+      tabindex="0" class="d-inline-block">
+      <button type="button" class="btn-flotante" onclick="crearQuizz()">Crear Quizz</button>
+    </span>
+  </div>
+
+  <div class="container1 dropdown">
+    <input type="checkbox dropbtn" id="toggle">
+    <span data-bs-placement="top" data-bs-toggle="tooltip" title="Da click aqui para abrir y cerrar el menú de preguntas" delay="0" tabindex="0" class="d-inline-block" >
+    <label for="toggle" class="button1"></label>
+
+    </span>
+   
+    
+    <nav class="dropdown-content">
+          <span data-bs-placement="top" data-bs-toggle="tooltip" title="Da click para insertar Pregunta Abierta" delay="0" tabindex="0" class="d-inline-block" >
+        <a  onclick="preguntaAbierta(), sumahref(this.id)" id="ref" class="w3-bar-item w3-button btn"  >Insertar Pregunta Abierta</a>
+        </sapn>
+        <span data-bs-placement="top" data-bs-toggle="tooltip" title="Da click aqui para agregar pregunta relacional" delay="0" tabindex="0" class="d-inline-block" >
+        <button  id="btn1" class="btn1 btn w3-bar-item w3-button" onclick="preguntaRelacional()"><a id="ref2" onclick="sumahref(this.id)" >Insertar Pregunta Relacional</a></button>
+        </span>
+        <span data-bs-placement="top" data-bs-toggle="tooltip" title="Da click aqui para crear una pregunta de opcion multiple" delay="0" tabindex="0" class="d-inline-block" >
+        <a onclick="preguntaOM(), sumahref(this.id)" class="w3-bar-item w3-button btn" id="ref3">Insertar Pregunta Opción Múltiple</a></button>
+      </span>
+      <span data-bs-placement="top" data-bs-toggle="tooltip" title="Da click aqui para crear una pregunta de con imagen" delay="0" tabindex="0" class="d-inline-block" >
+        <a onclick="preguntaIT(),sumahref(this.id)" id="ref4" class="btn w3-bar-item w3-button" >Insertar Pregunta-Imagen</a>
+      </span>
+      <span data-bs-placement="top" data-bs-toggle="tooltip" title="Da click aqui para creaa una pregunta de matematicas" delay="0" tabindex="0" class="d-inline-block" >
+        <a onclick="preguntaMatematicas(), sumahref(this.id)" class="btn w3-bar-item w3-button" id="ref5" onclick="sumahref(this.id)" >Insertar Pregunta de Matemáticas</a>
+      </span>
+      <span data-bs-placement="top" data-bs-toggle="tooltip" title="Da click aqui para crear tu pregunta arrrastrable"
+        delay="0" tabindex="0" class="d-inline-block">
+        <button id="btn2" class="btn2 btn w3-bar-item w3-button" onclick="preguntaArrastrar()"><a id="ref6"
+            onclick="sumahref(this.id)">Insertar Pregunta Arrastrable</a></button>
+      </span>
+    </nav>
+  </div>
+    <!--Empieza Nueva Pregunta Drag-->
+    <div id="preg1" class="tipoAr cuestionario justify-content-center mt-5 pt-5 nivel-Superior">
+      <div class="contenedorErrores">
+      </div>
+      <div class=" mt-3">
+        <div class="text-center mb-5 mt-5">
+          <h3>Pregunta Arrastrable</h3>
+          <h4 class="text-primary">Intrucciones</h4>
+          <p class="fs-5 justify-content-center text">Coloca cada elemento que se te solicita abajo y lo podrás visualizar e
+            ir armando en el recuadro azul de la derecha.</p>
+        </div>
+        <div class="col-md-7 mb-4 text-center mx-auto"> <label for="formGroupExampleInput" class="form-label">Instrucciones
+            para el Alumno</label> <input type="text" class="form-control instrucciones"
+            placeholder="Instrucciones para el alumno" value="Arrastra los elementos a la casilla correcta"> </div>
+        <div class="row responsivePG">
+          <div class="col-xs-12 col-lg-5 col-md-4 col-sm-12">
+            <div class="rounded-pill"> <a
+                class="position-absolute top-0 start-0 translate-middle bg-primary rounded-pill text-light shadow border-1"
+                style="width: 3rem; height:3rem; margin-left: 10px;">
+                <p class="fs-4" style="padding-top: 4px; padding-left: 17px;">1</p>
+              </a> </div>
+            <div class="mt-5">
+              <h4 class="text-center mb-4">Busca la imagen que quieras agregar:</h4> <input type="file"
+                class="form-control imgs L-file" accept="image/*" name="imgs">
+              <div class="mt-3 text-center">
+                <h4 class="text-dark mb-3">Coloca la cantidad de recuadros:</h4>
+                <div class="mb-3"> <input type="number" placeholder="Cantidad:" class="form-control caRe" min="0"> </div>
+                <button type="button" class="btn btn-primary fw-bold" onclick="cuadros(this)">Crear</button>
+              </div>
+              <h4 class="text-dark mb-3 mt-3">Escribe las palabras que quieras agregar:</h4>
+              <div class="mb-3 text-center"> <input type="text" placeholder="Coloca las palabras:"
+                  class="form-control palabrasCNT"> <button type="button" class="btn btn-primary fw-bold mt-3"
+                  onclick="palabras(this)">Crear</button> </div>
+              <div class="mt-2 text-center">
+                <h4 class="text-dark mb-3">Coloca la cantidad de flechas:</h4>
+                <div class="mb-3"> <input type="number" placeholder="Cantidad:" class="form-control caFle"> </div>
+                <h4 class="text-dark mb-3">Tipos de flecha:</h4> <button type="button" class="btn btn-primary fw-bold mb-3"
+                  onclick="flechaHoDerecha(this)"><img src="/img/flechas/flechaDerecha.png" style="width: 40px !important;"
+                    alt="Flecha derecha" height="25px;"></button> <button type="button" class="btn btn-primary fw-bold mb-3"
+                  onclick="flechaDiaDerecha(this)"><img src="/img/flechas/lateralderechaarriba.png"
+                    style="width: 28px !important;" alt="lateral derecha arriba" height="34px;"></button> <button
+                  type="button" class="btn btn-primary fw-bold mb-3" onclick="flechaAbajo(this)"><img
+                    src="/img/flechas/flechaAbajo.png" style="width: 20px !important;" alt="Flecha abajo"
+                    height="34px;"></button> <button type="button" class="btn btn-primary fw-bold mb-3"
+                  onclick="flechaDiaDerechaInv(this)"><img src="/img/flechas/lateralderechaabajo.png"
+                    style="width: 30px !important;" alt="Lateral derecha abajo" height="30px;"></button>
+              </div>
+            </div>
+          </div> <!-- Comienza Lienzo -->
+          <div class="col-xs-12 col-lg-5 col-md-6 col-sm-12 pl-3"><button type="button" class="btn btn-danger">Eliminar
+              elementos del lienzo</button>
+            <div class="lienzo shadow mt-3 mb-5 " id="lienzo0">
+              <div class="contenedorIMG2">
+                <!-- <img src="/img/noche.jpg" class="img-PLienzo img-fluid" >-->
+                <img src="/img/hapy.jpeg" class="img-PLienzo img-fluid">
+              </div>
+              <!--<div class="col-12 container"> </div>-->
+            </div>
+          </div> <!-- Termina Lienzo -->
+  
+  
+  <a href="/cuarto2">Prueba Imagenes</a>
+  <script>
+
+    var contadorhref = 0;
+    function sumahref(id) {
+
+      if (id === "ref") {
+        var ref = document.getElementById("ref");
+        contadorhref++;
+        ref.setAttribute("href", '#preg' + contadorhref);
+
+
+      } else if (id == "ref2") {
+
+        var ref2 = document.getElementById("ref2");
+        contadorhref++;
+        ref2.setAttribute("href", '#preg' + contadorhref);
+
+      } else if (id === "ref3") {
+
+        var ref3 = document.getElementById("ref3");
+        contadorhref++;
+        ref3.setAttribute("href", '#preg' + contadorhref);
+
+      } else if (id === "ref4") {
+
+        var ref4 = document.getElementById("ref4");
+        contadorhref++;
+        ref4.setAttribute("href", '#preg' + contadorhref);
+
+
+      } else if (id === "ref5") {
+        var ref5 = document.getElementById("ref5");
+        contadorhref++;
+        ref5.setAttribute("href", '#preg' + contadorhref);
+
+      } else if (id === "ref6") {
+        var ref6 = document.getElementById("ref6");
+        contadorhref++;
+        ref6.setAttribute("href", '#preg' + contadorhref);
+
+      } else {
+        console.log("error de link");
+
+      }
+    }
+  
+  </script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+<script src="http://code.jquery.com/ui/1.8.21/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+<script src="/js/creadorQuizzes.js" type="text/javascript"></script>
+  <script src="/js/creadorQuizzes.js" type="text/javascript"></script>
+
+</body>
+
+</html>

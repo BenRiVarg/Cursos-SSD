@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADMINISTRADORES</title>
+    <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+        </style>
+</head>
+<body>
+    <H1>REGISTRO DE USUARIOS</H1>
+    <a href="/administrador/crear">Crear Nuevo</a>
+    <table>
+        <tr>
+          <th>Nombre</th>
+          <th>Rol</th>
+          <th>Estatus</th>
+          <th>Editar</th>
+        </tr>
+            <% 
+           user.forEach (function (user){ %>
+            <tr>
+                <td><%= user.nombre %></td>
+                <td><%= user.rol %></td>
+                <td> <%
+                    if (user.estatus) { %>
+                    <h2>Activo</h2>
+                    <% }
+                    else { %>
+                        <h2>Inactivo</h2>
+                        <% }
+                      %>              
+                 </td>
+                 <td> <button style="background-color: lightblue; width: 400 px;">Editar</button>
+                  <a href="/administrador/editar/<%= user._id %>">Editar</a>
+                </td>
+                <td> 
+                  <form action="/administrador/borrar" method="POST">
+                    <input type="hidden" name="id" value="<%= user._id %>" >
+                  <input type="submit" style="background-color: lightcoral; width: 400 px;" value="Borrar">
+                  </form>
+                 
+                </td>
+            </tr>            
+
+                <% }); 
+            %> 
+           
+        
+    
+      </table>
+
+</body>
+</html>

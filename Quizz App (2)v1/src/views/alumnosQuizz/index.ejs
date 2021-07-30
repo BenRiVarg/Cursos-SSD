@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <title>Bienvenido</title>
+    <style>
+      table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      td,
+      th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+      }
+
+      tr:nth-child(even) {
+        background-color: #dddddd;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="cointainer my-5">
+
+      <!-- <div class="row justify-content-end">
+        <div class="col-2"><a href="/logout" class="btn btn-danger btn-block">Cerrar sesión</a></div>
+      </div> -->
+
+      <div class="row justify-content-center">
+        <div class="col-5 text-center">
+          <h1>Quizz</h1>
+        </div>
+      </div>
+
+      <div class="row my-3 justify-content-around">
+
+
+      </div>
+
+      <div class="row justify-content-center">
+
+        <!--<div class="col-6 text-center my-2">
+          <h3 class="text-center font-weight-bold">Lista de Examenes</h3>
+        </div>-->
+        <div class="col-11 col-sm-10 col-md-5 col-lg-3 my-3 my-md-auto border shadow my-auto"
+             style="border-radius: 15px;">
+          <h3>
+            Informacion:
+          </h3>
+          <h5 class="border-bottom">
+            Materia: <%= data.nombreMateria
+                %>
+          </h5>
+          <!-- <h5 class="border-bottom">
+            Grupo: <%= data.grupo
+                %>
+          </h5> -->
+          <h5 class="border-bottom">
+            Nombre del alumno: <%= data.alumno
+                %>
+          </h5>
+        </div>
+
+        <div class="col-11 col-sm-10 col-md-5 col-lg-5 my-3 my-md-auto ">
+          <table class="table shadow">
+
+            <tr>
+              <th class="text-center">Quizz</th>
+             <!-- <th class="text-center">Estado</th>-->
+              <th class="text-center">Acción</th>
+            </tr>
+            <% for(var
+               j=0;
+               j
+               <
+               datosCuestionario.length;j++)
+               {%>
+              <tr>
+                <td class="text-center">
+                  <%= datosCuestionario[j].nombre
+                      %>
+                </td>
+
+              <!--
+                <td class="text-center">
+                  <%= datosCuestionario[j].estado
+                      %>
+                </td>
+              -->
+                <td class="text-center">
+                  <% if(datosCuestionario[j].intentos<=datosCuestionario[j].oportunidades){%>
+                    <a class="btn btn-info"
+                    href="/alumnos/examen/<%=datosCuestionario[j].id%>/alumno/<%= data.idAlumno%>/materia/<%= data.nombreMateria
+                    %>"
+                    style="text-decoration: none;">Iniciar Intento</a>
+                    <%}else{%>
+                      <div class="col-10 border border-primary text-primary mx-auto rounded p-1">No tienes más intentos</div>
+                    <%}%>
+                </td>
+              </tr>
+
+
+              <% }
+                 %>
+          </table>
+        </div>
+
+        <div class="col-11 col-sm-10 col-md-5 col-lg-3 my-3 my-md-auto border shadow text-center"
+             style="border-radius: 15px; max-height:20vh ;">
+          <img src="<%= data.urlImg %>"
+               style="max-height:20vh ;"
+               class="img-fluid py-3"
+               alt="">
+        </div>
+      </div>
+
+   
+    </div>
+    <a href="/cuarto2">Prueba Imagenes</a>
+  </body>
+
+</html>
