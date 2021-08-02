@@ -29,7 +29,7 @@
                     <div class="border border-dark mx-auto mt-4" id="hijo" >
                         <div class="border border-dark mx-auto mt-4" id="hijo">
                             <div class="border border-dark mx-auto text-center mt-4" id="hijo">
-                                <button class=" btn btn-success mt-5" onclick="elegir(this)">Elegir</button>
+                                <button id="button" class="btn btn-success mt-5" onclick="elegir(this)">Elegir</button>
                             </div>
                         </div>
                     </div>
@@ -43,15 +43,15 @@
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
       <script>
-        var elementoMemoria
+        var elementoMemoria = '';
         var strVar="";
         strVar += " <p class=\"text-white display-5\"> Selecto<\/p>";
 
           function elegir(objetoHTML){
-            console.log("ELEMENTO QUE DISPARA LA FUNCIÓN:")
-            console.log(objetoHTML)
-            console.log("PADRE INMEDIATO:")
-            console.log(objetoHTML.parentElement)
+            console.log("ELEMENTO QUE DISPARA LA FUNCIÓN:");
+            console.log(objetoHTML);
+            console.log("PADRE INMEDIATO:");
+            console.log(objetoHTML.parentElement);
 
             var padre=objetoHTML.parentElement;
            
@@ -61,7 +61,7 @@
          //   objetoHTML.parentElement.style.backgroundColor=" #00e68a"
          //   objetoHTML.parentElement.insertAdjacentHTML("afterbegin",strVar);
             
-            loop(objetoHTML,elementoMemoria)
+            loop(objetoHTML,elementoMemoria);
            
           }
 
@@ -71,19 +71,21 @@
                 
                     if( div.id!="padre"){
                         elementoMemoria=div.parentElement;
+                        return elementoMemoria;
                     }
                     else{
-                        elementoMemoria=objBoton.parentElement
+                        elementoMemoria=objBoton.parentElement; 
+                        return elementoMemoria;
                     }
             }
             else{
-                elementoMemoria=objBoton.parentElement
+                elementoMemoria=objBoton.parentElement;
             }
-            console.log("Elemento en Memoria:")
-            console.log(elementoMemoria)
-
-            elementoMemoria.style.backgroundColor=" #00e68a"
-            elementoMemoria.insertAdjacentHTML("afterbegin",strVar);
+            console.log("Elemento en Memoria:");
+            console.log(elementoMemoria);
+            elementoMemoria.style.backgroundColor="#00e68a";
+            elementoMemoria.insertAdjacentHTML("afterbegin",strVar);  
+            
           }
       </script>
     <!-- Option 2: Separate Popper and Bootstrap JS -->
